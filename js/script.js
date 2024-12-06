@@ -1,3 +1,9 @@
+{
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
 // Toggle class active untuk hamburger menu
 const navbarNav = document.querySelector(".navbar-nav");
 
