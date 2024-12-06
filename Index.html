@@ -19,6 +19,13 @@
     <!-- My style -->
 
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Alpine js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <!-- App -->
+     <script src="src/app.js"></script>
+     
   </head>
   <body>
     <!-- Navbar start -->
@@ -165,81 +172,38 @@
     <!-- Menu section end -->
 
     <!-- Products section star -->
-    <section class="products" id="products">
+    <section class="products" id="products" x-data="products">
       <h2><span>Produk Unggulan</span> Kami</h2>
       <p>
         Temukan produk kopi terbaik kami yang dipilih secara khusus dari biji
         kopi Sumba berkualitas tinggi.
       </p>
 
-      <div class="row">
-        <div class="product-card">
-          <div class="product-icon">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/product3.png" alt="Product 1" />
-          </div>
-          <div class="product-content">
-            <h3>Coffe Beans 1</h3>
-            <div class="product-stars">
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
+      <div class="row" x-data="products">
+        <template x-for="(item, index) in items" :key="index">
+          <div class="product-card">
+            <div class="product-icon">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <i data-feather="shopping-cart"></i></a>              
+              <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
             </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icon">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/product2.png" alt="Product 1" />
-          </div>
-          <div class="product-content">
-            <h3>Coffe Beans 1</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
+            <div class="product-image">
+              <img :src="'img/Products/' + item.img" :alt="item.name" />
             </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icon">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#" class="item-detail-button"
-              ><i data-feather="eye"></i
-            ></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/product1.jpg" alt="Product 1" />
-          </div>
-          <div class="product-content">
-            <h3>Coffe Beans 1</h3>
-            <div class="product-stars">
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div class="product-stars">
+                <i data-feather="star"></i>
+                <i data-feather="star"></i>
+                <i data-feather="star"></i>
+                <i data-feather="star"></i>
+                <i data-feather="star"></i>
+              </div>
+              <div class="product-price" x-text="'Rp ' + item.price.toLocaleString('id-ID')"></div>
             </div>
-            <div class="product-price">IDR 30K <span>IDR 55K</span></div>
           </div>
-        </div>
-      </div>
+        </template>
+      </div>      
     </section>
     <!-- Products section end -->
 
